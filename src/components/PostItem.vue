@@ -2,7 +2,7 @@
     <div class="post">
         <div class="body">
             <div><strong>Title:</strong>{{ post.title }}</div>
-            <div><strong>Description:</strong>{{ post.description }}</div>
+            <div><strong>Description:</strong>{{ post.body }}</div>
         </div>
         <div class="side">
             <my-button @click="$emit('delete')">Delete</my-button>

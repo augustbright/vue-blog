@@ -10,6 +10,6 @@ export default {
 
 <style scoped>
 .input {
-    padding: 4px;
+    padding: 10px;
 }
 </style>

@@ -2,9 +2,9 @@
     <div v-if="posts.length > 0">
         <div class="list">
             <h1>Posts</h1>
-            <div v-for="post in posts" :key="post.id">
-                <post-item :post="post" @delete="$emit('delete', post.id)" />
-            </div>
+            <transition-group name="posts-list">
+                <post-item v-for="post in posts" :key="post.id" :post="post" @delete="$emit('delete', post.id)" />
+            </transition-group>
         </div>
     </div>
     <div v-else>
@@ -33,5 +33,21 @@ export default {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
+}
+
+.posts-list-item {}
+
+.posts-list-enter-active,
+.posts-list-leave-active {
+    transition: all 0.2s ease;
+}
+.posts-list-enter-from,
+.posts-list-leave-to {
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.posts-list-move {
+    transition: transform 0.5s ease-in-out;
 }
 </style>

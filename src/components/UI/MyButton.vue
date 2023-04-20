@@ -12,7 +12,6 @@ export default {
 
 <style scoped>
 .button {
-    align-self: flex-end;
     background: none;
     padding: 8px 16px;
     border: 1px solid gray;
