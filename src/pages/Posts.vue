@@ -8,7 +8,7 @@
     <my-modal v-model:visible="addModalVisible">
         <post-form @create="createPost" />
     </my-modal>
-    <my-input v-model="search" placeholder="Search" />
+    <my-input v-focus v-model="search" placeholder="Search" />
     <div>
         <input type="checkbox" v-model="autoLoading" id="autoloading">
         <label for="autoloading">Autoloading</label>
@@ -16,7 +16,7 @@
     <post-list v-if="shouldRenderPostsList" @delete="deletePost" :posts="sortedPosts" />
     <list-paginator v-if="!autoLoading" v-model:currentPage="currentPage" v-model:pageSize="pageSize"
         :totalCount="postsCount" />
-    <div ref="posts-end" class="posts-end" />
+    <div v-intersection="handleIntersection" ref="posts-end" class="posts-end" />
     <div v-if="isLoading" class="loading">Loading...</div>
 </template>
 
@@ -121,23 +121,16 @@ export default {
 
         loadMore() {
             this.currentPage++;
+        },
+
+        handleIntersection() {
+            if (!this.isLoading && this.autoLoading && !this.isLastPage) {
+                this.loadMore();
+            }
         }
     },
     mounted() {
         this.fetchPosts();
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting && !this.isLoading && this.autoLoading && !this.isLastPage) {
-                    this.loadMore();
-                }
-            });
-        }, {
-            rootMargin: '0px',
-            threshold: 1
-        });
-
-        observer.observe(this.$refs['posts-end'] as Element);
     }
 }
 </script>

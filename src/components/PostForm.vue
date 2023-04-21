@@ -1,7 +1,7 @@
 <template>
     <form class="form" @submit.prevent>
         <h4>Add Post</h4>
-        <my-input v-model="title" type="text" placeholder="Title"/>
+        <my-input v-focus v-model="title" type="text" placeholder="Title"/>
         <my-input v-model="description" type="text" placeholder="Description"/>
         <my-button @click="createPost">Add</my-button>
     </form>
@@ -18,7 +18,7 @@ export default {
             this.$emit('create', {
                 id: Date.now(),
                 title: this.title,
-                description: this.description
+                body: this.description
             })
             this.title = '';
             this.description = '';

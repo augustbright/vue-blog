@@ -6,6 +6,9 @@
                 <router-link to="/posts">Posts</router-link>
             </my-button>
             <my-button>
+                <router-link to="/store">Store</router-link>
+            </my-button>
+            <my-button>
                 <router-link to="/about">About</router-link>
             </my-button>
         </div>
